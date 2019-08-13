@@ -6,7 +6,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
@@ -22,7 +21,6 @@ public class Driver {
         capabilities.setCapability("noReset","true");
 
         driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public static AndroidDriver<AndroidElement> getCurrentDriver(){

@@ -23,17 +23,17 @@ public class Case01登陆 {
     }
 
     @Test
-    public void 登陆() throws MalformedURLException {
+    public void 登陆() throws MalformedURLException, InterruptedException {
 
         Page找游戏 page找游戏 = new Page找游戏().进入找游戏首页();
-        page找游戏.点击我().点击登陆().成功登陆();
+        page找游戏.点击我().点击登陆().成功登陆("2017011159","123456");
 
     }
 
-//    @Test(dependsOnMethods = "登陆")
-//    public void suibian(){
-//        System.out.println("zhe ge shi suib");
-//    }
+    @Test
+    public void suibian(){
+        System.out.println("zhe ge shi suib");
+    }
 //
 //    @AfterMethod
 //    public void aftermethod(){
