@@ -4,34 +4,15 @@ import com.m4399.gamecenter.driver.Driver;
 import com.m4399.gamecenter.pages.Page找游戏;
 import com.m4399.gamecenter.utils.CsvRead;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.util.Iterator;
 
 public class Case01登陆Test {
-
-    @BeforeTest
-    public void case01(){
-        System.out.println("This is beforetest");
-    }
-
-    @AfterTest
-    public void tearDown(){
-        Driver.getCurrentDriver().quit();
-    }
-
-    @BeforeClass
-    public void beforeclass(){
-        System.out.println("This is beforeclass");
-    }
-
-    @BeforeMethod
-    public void beforemethod(){
-        System.out.println("this is beforemethod");
-    }
-
-
     @DataProvider(name = "logindata")
     public Object[][] logindata(){
         Object[][] objects = new Object[][]{
@@ -47,24 +28,19 @@ public class Case01登陆Test {
         return csvRead.readDataFromCSV("/Users/zhikaiye/IdeaProjects/4399autotest_appium/src/main/resources/datalogin.csv");
     }
 
+    @BeforeClass
+    public void setUp(){
+
+    }
+
     @Test(dataProvider = "datalogin")
     public void 登陆(String username,String password,String expect) throws MalformedURLException {
         Page找游戏 page找游戏 = new Page找游戏().进入找游戏首页();
         Assert.assertEquals(page找游戏.点击我().点击登陆().登陆(username, password),expect);
     }
-//
-//    @AfterMethod
-//    public void aftermethod(){
-//        System.out.println("this is aftermethod");
-//    }
-//
-//    @BeforeClass
-//    public void afterclass(){
-//        System.out.println("This is afterclass");
-//    }
-//
-//    @AfterTest
-//    public  void aftertest(){
-//        System.out.println("this is aftertest");
-//    }
+
+    @AfterClass
+    public void tearDown(){
+        Driver.getCurrentDriver().quit();
+    }
 }

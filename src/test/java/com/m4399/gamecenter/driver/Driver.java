@@ -15,7 +15,7 @@ public class Driver {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformNage","android");
-        capabilities.setCapability("deviceName","35a5dba2");
+        capabilities.setCapability("deviceName","ad39870b");
         capabilities.setCapability("appPackage","com.m4399.gamecenter");
         capabilities.setCapability("appActivity",".controllers.splash.SplashActivity");
         capabilities.setCapability("noReset","true");
