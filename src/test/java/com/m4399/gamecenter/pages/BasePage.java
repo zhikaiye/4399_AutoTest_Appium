@@ -1,7 +1,6 @@
 package com.m4399.gamecenter.pages;
 
 import com.m4399.gamecenter.driver.Driver;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
@@ -15,10 +14,9 @@ public class BasePage {
     static By[] byList ;
     BasePage() {
         byList = new By[]{
-                byXpathAndId("//*[@resource-id='com.m4399.gamecenter:id/btn_dialog_horizontal_left']"),
-                byXpathAndId("//*[@resource-id='android:id/button1' and @text='允许']"),
-                byXpathAndId("//*[@resource-id='com.m4399.gamecenter:id/tv_skip']"),
-                byXpathAndId("btn_dialog_horizontal_left")
+                byXpathOrID("//*[@resource-id='com.m4399.gamecenter:id/btn_dialog_horizontal_left']"),
+                byXpathOrID("//*[@resource-id='android:id/button1' and @text='允许']"),
+                byXpathOrID("//*[@resource-id='com.m4399.gamecenter:id/tv_skip']")
         };
     }
 
@@ -51,7 +49,7 @@ public class BasePage {
 
 
 
-    static By byXpathAndId(String locater) {
+    static By byXpathOrID(String locater) {
         if (locater.matches("/.*")) {
             return By.xpath(locater);
         } else {
@@ -64,18 +62,42 @@ public class BasePage {
     }
 
     /**
-     * 滑动到指定的element
-     *
+     * 滚动到制定的text
      * @param driver
-     * @param x
-     * @param y
+     * @param className
+     * @param content
      */
-    static void swipe(AndroidDriver driver, Point x, Point y) {
-
-        TouchAction touchAction = new TouchAction(driver);
-        System.out.println("aaa");
+    static void scrollIntoViewByText(AndroidDriver driver, String className, String content) {
+        driver.findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().className(\""+className+"\")).scrollIntoView(new UiSelector().text(\""+content+"\"))"
+        );
 
     }
+
+    /**
+     * 滚动到制定的ResourceID
+     * @param driver
+     * @param className
+     * @param content
+     */
+    static void scrollIntoViewByResourceID(AndroidDriver driver,String className,String content){
+        driver.findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().className(\""+className+"\")).scrollIntoView(new UiSelector().resourceId(\""+content+"\"))"
+        );
+    }
+
+    /**
+     * 滚动到制定的Description
+     * @param driver
+     * @param className
+     * @param content
+     */
+    static void scrollIntoViewByDescription(AndroidDriver driver,String className,String content){
+        driver.findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().className(\""+className+"\")).scrollIntoView(new UiSelector().description(\""+content+"\"))"
+        );
+    }
+
 
     /**
      * 判断页面是否存在element。存在返回true，否则为false。
@@ -107,6 +129,13 @@ public class BasePage {
         }
     }
 
+    /**
+     * 等待查找element
+     * @param driver
+     * @param timeout
+     * @param locator
+     * @return
+     */
     static WebElement elementWait(WebDriver driver, int timeout, By locator) {
         WebDriverWait webDriverWait = new WebDriverWait(driver, timeout);
         try {
@@ -119,7 +148,7 @@ public class BasePage {
     }
 
     /**
-     * 获取页面toast：循环查找5次，没次间隔0.5秒。并返回toast
+     * 获取页面toast：10秒内等待找到toast，未找到返回"未找到toast或者发生其它异常"
      *
      * @return
      */

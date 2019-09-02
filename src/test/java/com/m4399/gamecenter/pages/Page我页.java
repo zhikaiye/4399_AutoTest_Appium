@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 public class Page我页 extends BasePage {
 
-    By btn_login = byXpathAndId("btn_login");
+    By btn_login = byXpathOrID("btn_login");
 
     public Page登陆注册 点击登陆() {
 

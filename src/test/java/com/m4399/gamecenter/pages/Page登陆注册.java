@@ -4,9 +4,9 @@ import com.m4399.gamecenter.driver.Driver;
 import org.openqa.selenium.By;
 
 public class Page登陆注册 extends BasePage {
-    By et_username = byXpathAndId("et_username");
-    By et_password = byXpathAndId("et_password");
-    By login_button = byXpathAndId("login_button");
+    By et_username = byXpathOrID("et_username");
+    By et_password = byXpathOrID("et_password");
+    By login_button = byXpathOrID("login_button");
 
     /**
      * 1、登陆成功返回toast："登陆成功"；
