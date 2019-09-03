@@ -1,5 +1,6 @@
 package com.m4399.gamecenter.testcase;
 
+import com.m4399.data.DataSource;
 import com.m4399.gamecenter.driver.Driver;
 import com.m4399.gamecenter.pages.Page找游戏;
 import com.m4399.gamecenter.utils.CsvRead;
@@ -33,7 +34,7 @@ public class Case01登陆Test {
 
     }
 
-    @Test(dataProvider = "datalogin")
+    @Test(dataProvider = "loginData",dataProviderClass = DataSource.class)
     public void 登陆(String username,String password,String expect) throws MalformedURLException {
         Page找游戏 page找游戏 = new Page找游戏().进入找游戏首页();
         Assert.assertEquals(page找游戏.点击我().点击登陆().登陆(username, password),expect);
