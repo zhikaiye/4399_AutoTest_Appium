@@ -13,7 +13,7 @@ public class Case02滑动Test {
     public void huadong() throws MalformedURLException {
 
         Page找游戏 page找游戏 = new Page找游戏().进入找游戏首页();
-        page找游戏.滑动找到首页游戏("龙族幻想");
+        page找游戏.滑动找到首页游戏("怪物老婆养成记");
 
     }
 
